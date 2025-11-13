@@ -100,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7411141508962114558
 Transform:
   m_ObjectHideFlags: 0
@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 5083072212871850981}
   - component: {fileID: 6063360068288897676}
   - component: {fileID: 8405324444058420990}
+  - component: {fileID: 3487327612969650563}
   m_Layer: 3
   m_Name: minionHeart
   m_TagString: Enemy
@@ -210,7 +211,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -1126518034, guid: 2f93e51e492af5e4780f0983e17e81b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -233,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f0c571d3b93a6478c1ceed3e5ab29f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 5
   destroyDelay: 3
   deathGravity: 2
   knockbackForce: 2
@@ -271,8 +272,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Offset: {x: 0, y: -0.025149703}
+  m_Size: {x: 1, y: 1.786031}
   m_Direction: 0
 --- !u!50 &6063360068288897676
 Rigidbody2D:
@@ -316,6 +317,31 @@ MonoBehaviour:
   moveSpeed: 2
   leftBoundary: -8
   rightBoundary: 9
+  swarmSpeed: 3
+  playerDetectRange: 6
+  minDistanceToPlayer: 1.2
+  randomOffsetRange: 1
+--- !u!95 &3487327612969650563
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7927243237347428053}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3df74c5bc8caecd4e9580f53d6e9837d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7959868225290065338
 GameObject:
   m_ObjectHideFlags: 0
