@@ -1,6 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossBase : MonoBehaviour
 {
@@ -176,7 +176,16 @@ public class BossBase : MonoBehaviour
             rb.gravityScale = 2f;
         }
 
-        Destroy(gameObject, deathDelay);
+        // --- SLOW MOTION ---
+        Time.timeScale = 0.3f;
+
+        // Find fade panel in scene
+        FadeController fade = FindObjectOfType<FadeController>();
+
+        if (fade != null)
+            StartCoroutine(fade.FadeToWhiteAndLoad("Win", 1.5f));
+        else
+            SceneManager.LoadScene("Win");
     }
 
     void OnTriggerEnter2D(Collider2D other)

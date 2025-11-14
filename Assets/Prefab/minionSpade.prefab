@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 8405324444058420990}
   - component: {fileID: 3487327612969650563}
   m_Layer: 3
-  m_Name: minionClub
+  m_Name: minionSpade
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,7 +211,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1587214244, guid: 889010e9673b29d4bbed867662d1eb58, type: 3}
+  m_Sprite: {fileID: -2139230010, guid: eb59f25f3be607246933eb3fac20b9e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -331,7 +331,7 @@ Animator:
   m_GameObject: {fileID: 7927243237347428053}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 32369361968dbd54abef38feb852448b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 88b936ec12d4033449f8b04cefd43816, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

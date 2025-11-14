@@ -21,19 +21,39 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        //float move = Input.GetAxis("Horizontal");
+        //rb.velocity = new Vector2(move * moveSpeed, rb.velocity.y);
+
+        //if (Input.GetButtonDown("Jump") && isGrounded)
+        //    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+
+        //if (rb.velocity.x > 0.1f)
+        //    sr.flipX = false;  
+        //else if (rb.velocity.x < -0.1f)
+        //    sr.flipX = true;   
+
+        //float speed = Mathf.Abs(rb.velocity.x);
+        //anim.SetFloat("Speed", speed);
         float move = Input.GetAxis("Horizontal");
+
+        // movement
         rb.velocity = new Vector2(move * moveSpeed, rb.velocity.y);
 
+        // jump
         if (Input.GetButtonDown("Jump") && isGrounded)
+        {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            anim.SetTrigger("Jump");
+        }
 
-        if (rb.velocity.x > 0.1f)
-            sr.flipX = false;  
-        else if (rb.velocity.x < -0.1f)
-            sr.flipX = true;   
+        // flip sprite
+        if (move > 0.1f)
+            sr.flipX = false;
+        else if (move < -0.1f)
+            sr.flipX = true;
 
-        float speed = Mathf.Abs(rb.velocity.x);
-        anim.SetFloat("Speed", speed);
+        // running / idle animation
+        anim.SetFloat("Speed", Mathf.Abs(move));
     }
 
     void OnCollisionEnter2D(Collision2D col)

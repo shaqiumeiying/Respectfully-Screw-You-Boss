@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fc81761081956cb43b45b8a87ec0829b
+guid: 701223f8baa887c4a86498f2e6b0e3b4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1500
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: minion_Spades_0
+      name: Jumping_0
       rect:
         serializedVersion: 2
-        x: 587
-        y: 502
-        width: 1471
-        height: 2994
+        x: 126
+        y: 53
+        width: 191
+        height: 399
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 758d735ea209ac643b3b0ed84a5d23c7
-      internalID: -666892734
+      spriteID: 2179f1ec143c85e4fac11eb277ae8ce5
+      internalID: -605303049
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: minion_Spades_1
+      name: Jumping_1
       rect:
         serializedVersion: 2
-        x: 3544
-        y: 492
-        width: 1279
-        height: 3018
+        x: 628
+        y: 43
+        width: 223
+        height: 412
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +132,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25a93ccbfec5cc74994636d0a734f64e
-      internalID: 2088437826
+      spriteID: 837cca859df094a4493c4020db5c376b
+      internalID: -1175830664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jumping_2
+      rect:
+        serializedVersion: 2
+        x: 1074
+        y: 68
+        width: 303
+        height: 385
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b05466c4b4497ed47b19207627be4a67
+      internalID: -285051115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jumping_3
+      rect:
+        serializedVersion: 2
+        x: 1556
+        y: 109
+        width: 338
+        height: 345
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae544b2b41b73044295c94e27b8608e9
+      internalID: 650919243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jumping_4
+      rect:
+        serializedVersion: 2
+        x: 2119
+        y: 56
+        width: 214
+        height: 399
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed8f38b223b3abd4980be92ee8eef04a
+      internalID: 591584647
       vertices: []
       indices: 
       edges: []
@@ -149,8 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      minion_Spades_0: -666892734
-      minion_Spades_1: 2088437826
+      Jumping_0: -605303049
+      Jumping_1: -1175830664
+      Jumping_2: -285051115
+      Jumping_3: 650919243
+      Jumping_4: 591584647
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
