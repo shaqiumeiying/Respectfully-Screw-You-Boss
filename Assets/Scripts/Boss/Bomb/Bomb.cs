@@ -76,8 +76,7 @@ public class Bomb : MonoBehaviour
             PlayerHealth player = hit.GetComponent<PlayerHealth>();
             if (player != null)
             {
-                Vector2 hitDir = (player.transform.position - transform.position).normalized;
-                player.TakeDamage(explosionDamage, hitDir);
+                player.TakeDamage(explosionDamage);
                 Debug.Log("Player hit by bomb");
             }
         }

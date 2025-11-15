@@ -47,7 +47,7 @@ public class BombSpawner : MonoBehaviour
 
         GameObject shadow = Instantiate(shadowPrefab, targetPos, Quaternion.identity);
         SpriteRenderer sr = shadow.GetComponent<SpriteRenderer>();
-        sr.color = new Color(0, 0, 0, 0.4f);
+        sr.color = new Color(0, 0, 0, 0.6f);
 
         yield return new WaitForSeconds(delayBeforeFall);
 

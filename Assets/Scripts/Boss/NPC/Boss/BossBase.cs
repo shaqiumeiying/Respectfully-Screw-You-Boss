@@ -113,11 +113,10 @@ public class BossBase : MonoBehaviour
         else
         {
             float dir = playerPos.x >= transform.position.x ? 1f : -1f;
-            Vector2 hitDir = new Vector2(dir, 1f).normalized;
 
             PlayerHealth player = playerTarget.GetComponent<PlayerHealth>();
             if (player != null)
-                player.TakeDamage((int)attackDamage, hitDir);
+                player.TakeDamage((int)attackDamage);
         }
 
         if (attackSprite != null)

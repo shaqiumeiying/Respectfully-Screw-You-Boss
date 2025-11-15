@@ -11,11 +11,14 @@ public class PlayerHealth : MonoBehaviour
     private bool isInvincible = false;
 
     [Header("Hit Reaction")]
-    public float knockbackForce = 8f;     
+    public float knockbackForce = 200f;     
     public float invincibleDuration = 2f;  
-    public float flashInterval = 0.1f;  
+    public float flashInterval = 0.1f;
+
+    public UIHeartsController heartsUI;
 
     private Rigidbody2D rb;
+    private Collider2D col;
     private SpriteRenderer sr;
 
     void Start()
@@ -32,33 +35,31 @@ public class PlayerHealth : MonoBehaviour
 
             if (collision.collider.CompareTag("Enemy"))
             {
-                // calculate knockback
-                Vector2 hitDir = (transform.position - collision.transform.position).normalized;
-                TakeDamage(1, hitDir);
+            
+                Vector2 knockDir = new Vector2(-1f, 1f).normalized;
+                ApplyKnockback(knockDir);
+                TakeDamage(1);
             }
 
     }
 
-    public void TakeDamage(int amount, Vector2 hitDir)
+    void ApplyKnockback(Vector2 dir)
+    {
+        rb.velocity = Vector2.zero;
+        rb.AddForce(dir * knockbackForce, ForceMode2D.Impulse);
+        Debug.Log($"Player knocked back! {dir}" );
+    }
+
+
+    public void TakeDamage(int amount)
     {
         if (isInvincible) return;
-
+        
         currentHealth -= amount;
         currentHealth = Mathf.Max(0, currentHealth);
         Debug.Log($"Player hit! HP: {currentHealth}/{maxHealth}");
 
-        if (rb != null)
-        {
-            rb.velocity = Vector2.zero;
-            Vector2 knockDir = hitDir == default ? Vector2.up : hitDir.normalized;
-
-            Vector2 knockback = new Vector2(
-                knockDir.x + knockbackForce,
-                Mathf.Abs(knockDir.y) + 5f
-            );
-
-            rb.AddForce(knockback, ForceMode2D.Impulse);
-        }
+        heartsUI.UpdateHearts(currentHealth, maxHealth);
 
         if (currentHealth <= 0)
             Die();
@@ -99,8 +100,7 @@ public class PlayerHealth : MonoBehaviour
             BossBase.bossLastHealthPercent = percent;
         }
 
-        // --- SLOW MOTION ---
-        Time.timeScale = 0.3f;
+        //todo add player feedback
 
         // Find fade panel in scene
         FadeController fade = FindObjectOfType<FadeController>();
@@ -110,4 +110,5 @@ public class PlayerHealth : MonoBehaviour
         else
             SceneManager.LoadScene("Lose");
     }
+
 }

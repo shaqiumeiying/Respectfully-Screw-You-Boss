@@ -21,19 +21,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //float move = Input.GetAxis("Horizontal");
-        //rb.velocity = new Vector2(move * moveSpeed, rb.velocity.y);
-
-        //if (Input.GetButtonDown("Jump") && isGrounded)
-        //    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-
-        //if (rb.velocity.x > 0.1f)
-        //    sr.flipX = false;  
-        //else if (rb.velocity.x < -0.1f)
-        //    sr.flipX = true;   
-
-        //float speed = Mathf.Abs(rb.velocity.x);
-        //anim.SetFloat("Speed", speed);
         float move = Input.GetAxis("Horizontal");
 
         // movement
@@ -60,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Ground"))
             isGrounded = true;
+
     }
     void OnCollisionExit2D(Collision2D col)
     {

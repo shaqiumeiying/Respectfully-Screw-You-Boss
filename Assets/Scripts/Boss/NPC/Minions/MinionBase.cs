@@ -12,8 +12,8 @@ public class MinionBase : MonoBehaviour
     public float deathGravity = 2f;
 
     [Header("Hit Reaction")]
-    public float knockbackForce = 2f;
-    public float knockupForce = 2f;
+    public float knockbackForce = 10f;
+    public float knockupForce = 6f;
     public float flashTime = 0.1f;
 
     private Rigidbody2D rb;
@@ -32,7 +32,6 @@ public class MinionBase : MonoBehaviour
 
     public void TakeDamage(float amount, Vector2 hitDirection = default)
     {
-        StartCoroutine(FlashRed());
 
         if (rb != null)
         {
@@ -50,15 +49,6 @@ public class MinionBase : MonoBehaviour
         {
             StartCoroutine(DieAfterDelay(0.05f));
         }
-    }
-
-    IEnumerator FlashRed()
-    {
-        if (sr == null) yield break;
-        Color original = sr.color;
-        sr.color = Color.red;
-        yield return new WaitForSeconds(flashTime);
-        sr.color = original;
     }
 
     IEnumerator DieAfterDelay(float delay)
