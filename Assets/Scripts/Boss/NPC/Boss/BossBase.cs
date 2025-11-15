@@ -40,6 +40,8 @@ public class BossBase : MonoBehaviour
     public Sprite idleSprite;
     public Sprite attackSprite;
 
+    public static float bossLastHealthPercent = 0f;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -108,16 +110,20 @@ public class BossBase : MonoBehaviour
         {
             Debug.Log("Player out of range, attack missed.");
         }
+        else
+        {
+            float dir = playerPos.x >= transform.position.x ? 1f : -1f;
+            Vector2 hitDir = new Vector2(dir, 1f).normalized;
+
+            PlayerHealth player = playerTarget.GetComponent<PlayerHealth>();
+            if (player != null)
+                player.TakeDamage((int)attackDamage, hitDir);
+        }
 
         if (attackSprite != null)
             sr.sprite = attackSprite;
 
-        float dir = playerPos.x >= transform.position.x ? 1f : -1f;
-        Vector2 hitDir = new Vector2(dir, 1f).normalized;
-
-        PlayerHealth player = playerTarget.GetComponent<PlayerHealth>();
-        if (player != null)
-            player.TakeDamage((int)attackDamage, hitDir);
+        
 
         yield return new WaitForSeconds(0.15f);
 
@@ -186,6 +192,11 @@ public class BossBase : MonoBehaviour
             StartCoroutine(fade.FadeToWhiteAndLoad("Win", 1.5f));
         else
             SceneManager.LoadScene("Win");
+    }
+
+    public float GetHealthPercent()
+    {
+        return currentHealth / maxHealth;
     }
 
     void OnTriggerEnter2D(Collider2D other)

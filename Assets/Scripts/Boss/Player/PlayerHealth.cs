@@ -89,7 +89,25 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Player has died! Restarting level...");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
+        Debug.Log("Player has died!");
+        BossBase boss = FindObjectOfType<BossBase>();
+
+        if (boss != null)
+        {
+            float percent = boss.GetHealthPercent();
+            BossBase.bossLastHealthPercent = percent;
+        }
+
+        // --- SLOW MOTION ---
+        Time.timeScale = 0.3f;
+
+        // Find fade panel in scene
+        FadeController fade = FindObjectOfType<FadeController>();
+
+        if (fade != null)
+            StartCoroutine(fade.FadeToWhiteAndLoad("Lose", 1.5f));
+        else
+            SceneManager.LoadScene("Lose");
     }
 }
