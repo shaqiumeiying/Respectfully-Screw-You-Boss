@@ -33,6 +33,8 @@ public class MinionBase : MonoBehaviour
     public void TakeDamage(float amount, Vector2 hitDirection = default)
     {
 
+        StartCoroutine(FlashRed());
+
         if (rb != null)
         {
             rb.velocity = Vector2.zero;
@@ -73,6 +75,16 @@ public class MinionBase : MonoBehaviour
 
         Destroy(gameObject, destroyDelay);
     }
+
+    IEnumerator FlashRed()
+    {
+        if (sr == null) yield break;
+        Color original = sr.color;
+        sr.color = Color.red;
+        yield return new WaitForSeconds(flashTime);
+        sr.color = original;
+    }
+
 
     public float GetHealthRatio()
     {

@@ -272,8 +272,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.025149703}
-  m_Size: {x: 1, y: 1.786031}
+  m_Offset: {x: 0, y: -0.17250991}
+  m_Size: {x: 1, y: 2.0807514}
   m_Direction: 0
 --- !u!50 &6063360068288897676
 Rigidbody2D:
@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  leftBoundary: -8
+  leftBoundary: -7
   rightBoundary: 9
   swarmSpeed: 3
   playerDetectRange: 6
