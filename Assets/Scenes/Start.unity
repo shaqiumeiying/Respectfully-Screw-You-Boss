@@ -223,7 +223,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &728604117
 RectTransform:
   m_ObjectHideFlags: 0
@@ -839,8 +839,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a226eb8599798c4f846c389ed79e7fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineTop: {fileID: 728604116}
-  lineBottom: {fileID: 1582316982}
+  lineTop: {fileID: 728604117}
+  lineBottom: {fileID: 1582316983}
+  hoverAnimTime: 0.2
+  audioSource: {fileID: 0}
+  startSound: {fileID: 8300000, guid: 506d41d9639668b42b20f67c60a4c192, type: 3}
+  nextScene: Dialogue
 --- !u!114 &1163066932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -923,50 +927,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163066929}
   m_CullTransparentMesh: 1
---- !u!1 &1362541383
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1362541385}
-  - component: {fileID: 1362541384}
-  m_Layer: 0
-  m_Name: StartManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1362541384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362541383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae15ede3f93dfc046bba50a3e958cd40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1362541385
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362541383}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9167923, y: -0.9575246, z: -0.033997953}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1582316982
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,7 +944,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1582316983
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1467,4 +1427,3 @@ SceneRoots:
   - {fileID: 1582825741}
   - {fileID: 1797866926}
   - {fileID: 1092524069}
-  - {fileID: 1362541385}
