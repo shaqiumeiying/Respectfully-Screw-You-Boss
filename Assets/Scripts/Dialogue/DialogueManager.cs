@@ -45,9 +45,12 @@ public class DialogueManager : MonoBehaviour
                 dialogueText.text = lines[index];
                 isTyping = false;
             }
-            else
+            else if (index < lines.Length)
             {
                 NextLine();
+            }
+            else {
+                return;
             }
         }
     }

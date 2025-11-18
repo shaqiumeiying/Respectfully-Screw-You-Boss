@@ -34,9 +34,7 @@ public class HoverLines : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         if (sceneTriggered) return;
 
-        if (Input.GetKeyDown(KeyCode.Return) ||
-            Input.GetKeyDown(KeyCode.Space) ||
-            Input.GetMouseButtonDown(0) ||
+        if (Input.GetMouseButtonDown(0) ||
             Input.anyKeyDown ||
             Input.GetKeyDown(KeyCode.JoystickButton0))
         {
@@ -52,6 +50,7 @@ public class HoverLines : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (!sceneTriggered)
+            
             TriggerHover();
     }
 
