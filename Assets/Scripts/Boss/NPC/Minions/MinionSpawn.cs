@@ -8,7 +8,7 @@ public class MinionSpawn : MonoBehaviour
     public GameObject[] enemyPrefabs;   // Heart, Spade, Club, Clover
     public float baseSpawnInterval = 3f;    
     public float randomOffset = 1.5f;       
-    public int maxEnemies = 8;              
+    public int maxEnemies = 8;
 
     [Header("Spawn Position")]
     public float spawnXOffset = 2f;        

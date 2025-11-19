@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  leftBoundary: -7
+  leftBoundary: -10
   rightBoundary: 9
   swarmSpeed: 3
   playerDetectRange: 6

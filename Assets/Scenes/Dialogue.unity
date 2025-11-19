@@ -403,19 +403,19 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919072782}
-  m_LocalRotation: {x: 0, y: 0, z: -0.043619405, w: 0.9990483}
+  m_LocalRotation: {x: 0, y: 0, z: -0.026176924, w: 0.99965733}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1346042381}
   m_Father: {fileID: 455931007}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -5}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 300, y: -520}
-  m_SizeDelta: {x: 500, y: 300}
-  m_Pivot: {x: 1, y: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -3}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 185, y: -500}
+  m_SizeDelta: {x: 450, y: 360}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &919072784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,8 +467,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 919072783}
-  hiddenPos: {x: 300, y: -1255}
-  shownPos: {x: 300, y: -520}
+  hiddenPos: {x: 185, y: -1050}
+  shownPos: {x: 185, y: -500}
   duration: 0.7
 --- !u!1 &1346042378
 GameObject:
@@ -535,8 +535,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -601,8 +601,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -18, y: 18.5}
-  m_SizeDelta: {x: 250, y: 50}
+  m_AnchoredPosition: {x: 22.4, y: 68}
+  m_SizeDelta: {x: 341.5, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1359659376
 GameObject:
@@ -639,10 +639,9 @@ MonoBehaviour:
   portraitSlide: {fileID: 2043095893}
   boxSlide: {fileID: 919072786}
   lines:
-  - "Oh, I knew you\u2019d come crawling to see me\u2014how generous of me to let
-    you bask in the glorious presence of your Queen of Hearts!"
-  - placeholder
-  - plcehodler
+  - "I knew you\u2019d come to me, darling"
+  - Come, show me your devotion in battle
+  - "and let\u2019s see if your love can withstand mine!"
   audioSource: {fileID: 1359659379}
   typeSound: {fileID: 8300000, guid: 3b577a3f81046cc4fa6acc5ecd95fa0d, type: 3}
   pitchVariance: 0.05
@@ -876,17 +875,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043095889}
-  m_LocalRotation: {x: 0, y: 0, z: 0.078459114, w: 0.99691737}
+  m_LocalRotation: {x: 0, y: 0, z: -0.019808253, w: 0.99980384}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 455931007}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 9}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.27}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -155, y: -95}
-  m_SizeDelta: {x: 1379, y: 1000}
+  m_AnchoredPosition: {x: -18, y: -60}
+  m_SizeDelta: {x: 800, y: 850}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &2043095891
 MonoBehaviour:
@@ -939,8 +938,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2043095890}
-  hiddenPos: {x: -155, y: -1020}
-  shownPos: {x: -155, y: -95}
+  hiddenPos: {x: -18, y: -770}
+  shownPos: {x: -18, y: -60}
   duration: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
