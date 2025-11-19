@@ -2,15 +2,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.UI;
 
-public class HoverLines : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class HoverLines : MonoBehaviour,
+    IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler,
+    ISelectHandler, IDeselectHandler
 {
     [Header("Line Objects")]
     public RectTransform lineTop;
     public RectTransform lineBottom;
 
     [Header("Animation Settings")]
-    public float hoverAnimTime = 0.2f;       
+    public float hoverAnimTime = 0.2f;
 
     [Header("Audio")]
     public AudioSource audioSource;
@@ -28,29 +31,39 @@ public class HoverLines : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
         if (!audioSource)
             audioSource = gameObject.AddComponent<AudioSource>();
+
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     void Update()
     {
         if (sceneTriggered) return;
 
-        if (Input.GetMouseButtonDown(0) ||
-            Input.anyKeyDown ||
-            Input.GetKeyDown(KeyCode.JoystickButton0))
-        {
-            TriggerPress();
-        }
-
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
-        if (Mathf.Abs(x) > 0.2f || Mathf.Abs(y) > 0.2f)
-            TriggerHover();
+
+        if (Mathf.Abs(x) > 0.5f || Mathf.Abs(y) > 0.5f)
+        {
+            if (EventSystem.current.currentSelectedGameObject == null)
+            {
+                EventSystem.current.SetSelectedGameObject(gameObject);
+            }
+        }
+    }
+    // ================================
+    // Mouse Click + Controller A
+    // ================================
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        TriggerPress();
     }
 
+    // ================================
+    // Mouse Hover
+    // ================================
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (!sceneTriggered)
-            
             TriggerHover();
     }
 
@@ -60,15 +73,30 @@ public class HoverLines : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             TriggerExit();
     }
 
-    // -----------------------------------------
-    void TriggerPress()
+    // ================================
+    // Controller Navigation Hover
+    // ================================
+    public void OnSelect(BaseEventData eventData)
+    {
+        if (!sceneTriggered)
+            TriggerHover();
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        if (!sceneTriggered)
+            TriggerExit();
+    }
+
+    // ================================
+    // Start Game
+    // ================================
+    public void TriggerPress()
     {
         if (sceneTriggered) return;
-
         sceneTriggered = true;
 
         StopAllCoroutines();
-
         SetLineScale(1f);
 
         if (startSound)
@@ -83,12 +111,14 @@ public class HoverLines : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         SceneManager.LoadScene(nextScene);
     }
 
-    // -----------------------------------------
+    // ================================
+    // Hover Animation
+    // ================================
     void TriggerHover()
     {
         if (sceneTriggered || isHovered) return;
-        isHovered = true;
 
+        isHovered = true;
         StopAllCoroutines();
         StartCoroutine(ScaleLines(0f, 1f));
     }
@@ -96,21 +126,19 @@ public class HoverLines : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     void TriggerExit()
     {
         if (sceneTriggered || !isHovered) return;
-        isHovered = false;
 
+        isHovered = false;
         StopAllCoroutines();
         StartCoroutine(ScaleLines(1f, 0f));
     }
 
-    // -----------------------------------------
     IEnumerator ScaleLines(float from, float to)
     {
         float t = 0f;
         while (t < hoverAnimTime)
         {
             t += Time.deltaTime;
-            float v = Mathf.Lerp(from, to, t / hoverAnimTime);
-            SetLineScale(v);
+            SetLineScale(Mathf.Lerp(from, to, t / hoverAnimTime));
             yield return null;
         }
         SetLineScale(to);
