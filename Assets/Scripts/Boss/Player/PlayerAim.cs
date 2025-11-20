@@ -15,6 +15,10 @@ public class PlayerAim : MonoBehaviour
     public Color lineColor = Color.yellow;
     public float lineWidth = 0.05f;
 
+    [Header("Crosshair")]
+    public Transform crosshair; 
+    public float crosshairScale = 0.2f;
+
     private Camera mainCam;
     private LineRenderer line;
 
@@ -102,6 +106,13 @@ public class PlayerAim : MonoBehaviour
 
         line.SetPosition(0, start);
         line.SetPosition(1, end);
+
+        // --- UPDATE CROSSHAIR POSITION ---
+        if (crosshair)
+        {
+            crosshair.position = end;
+            crosshair.localScale = Vector3.one * crosshairScale;
+        }
     }
 
     // ----------------------------------------------------------

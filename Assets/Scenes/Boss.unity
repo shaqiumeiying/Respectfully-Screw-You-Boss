@@ -174,8 +174,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.5062648, y: 0.3457186}
-  m_Size: {x: 4.66973, y: 8.926836}
+  m_Offset: {x: 0.2977707, y: 0.34571886}
+  m_Size: {x: 5.0867176, y: 8.926836}
   m_Direction: 0
 --- !u!212 &36546537
 SpriteRenderer:
@@ -591,7 +591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &134986727
 Transform:
   m_ObjectHideFlags: 0
@@ -727,8 +727,10 @@ MonoBehaviour:
   aimRange: 1
   rotationSpeed: 10
   stickDeadzone: 0.2
-  lineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  lineColor: {r: 1, g: 0, b: 0.0119524, a: 1}
   lineWidth: 0.05
+  crosshair: {fileID: 0}
+  crosshairScale: 0.2
 --- !u!1 &142881402
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,6 +814,90 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2069347637}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &217746346
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 217746348}
+  - component: {fileID: 217746347}
+  m_Layer: 0
+  m_Name: Crosshair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &217746347
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217746346}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: c64190234599a6e498d5cb7ece9ea146, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 5.66, y: 5.84}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &217746348
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217746346}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.53416973, y: -0.93415904, z: 0.06690938}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &323995860
 GameObject:
@@ -1452,7 +1538,7 @@ MonoBehaviour:
   col: {fileID: 648848337}
   blinkCount: 5
   blinkSpeed: 0.12
-  dropDistance: 3
+  dropDistance: 6
   dropSpeed: 5
   respawnDelay: 1.5
 --- !u!1 &656453693
@@ -1861,6 +1947,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 10
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
 --- !u!114 &857450876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1879,10 +1967,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 264
   projectileSpeed: 15
-  projectileCooldown: 1
+  projectileCooldown: 0.5
   projectileDamage: 5
   meleeRange: 3
-  meleeCooldown: 0.5
+  meleeCooldown: 0.3
   meleeRadius: 1
   meleeDamage: 10
   shootSFX: {fileID: 8300000, guid: e151865dbddb82f4d9a1b02481435e05, type: 3}
@@ -1942,12 +2030,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f0561c610dbbb46b6dc7f49241eeda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 0}
-  aimRange: 3
+  firePoint: {fileID: 658198726}
+  aimRange: 1.5
   rotationSpeed: 10
   stickDeadzone: 0.2
-  lineColor: {r: 1, g: 0.017539846, b: 0, a: 1}
+  lineColor: {r: 1, g: 0, b: 0.12565422, a: 0}
   lineWidth: 0.05
+  crosshair: {fileID: 217746348}
+  crosshairScale: 1
 --- !u!120 &857450880
 LineRenderer:
   serializedVersion: 2
@@ -2758,7 +2848,7 @@ MonoBehaviour:
   col: {fileID: 1074232605}
   blinkCount: 5
   blinkSpeed: 0.12
-  dropDistance: 3
+  dropDistance: 6
   dropSpeed: 5
   respawnDelay: 1.5
 --- !u!1 &1100916771
@@ -3053,7 +3143,7 @@ Transform:
   m_GameObject: {fileID: 1368235432}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.29, z: 10}
+  m_LocalPosition: {x: 0, y: -0.29, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3251,7 +3341,7 @@ MonoBehaviour:
   - {fileID: 7927243237347428053, guid: faa4c86199ce9b44f9fc3d0353d22e74, type: 3}
   baseSpawnInterval: 3
   randomOffset: 1.5
-  maxEnemies: 8
+  maxEnemies: 3
   spawnXOffset: 2
   spawnYMin: -2
   spawnYMax: -1
@@ -3927,7 +4017,7 @@ MonoBehaviour:
   - {fileID: 7927243237347428053, guid: faa4c86199ce9b44f9fc3d0353d22e74, type: 3}
   baseSpawnInterval: 3
   randomOffset: 1.5
-  maxEnemies: 7
+  maxEnemies: 3
   spawnXOffset: -18
   spawnYMin: -2
   spawnYMax: -1
@@ -4143,11 +4233,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sr: {fileID: 1958509130}
   col: {fileID: 1958509129}
-  blinkCount: 5
+  blinkCount: 3
   blinkSpeed: 0.12
   dropDistance: 3
   dropSpeed: 5
-  respawnDelay: 1.5
+  respawnDelay: 0.8
 --- !u!1 &2069347636
 GameObject:
   m_ObjectHideFlags: 0
@@ -4561,3 +4651,4 @@ SceneRoots:
   - {fileID: 1581602447}
   - {fileID: 46462774}
   - {fileID: 929907691}
+  - {fileID: 217746348}
