@@ -7,6 +7,7 @@ public class UIButtonAction : MonoBehaviour
 
     public void LoadScene()
     {
+        Debug.Log("Loading scene: " + sceneToLoad);
         SceneManager.LoadScene(sceneToLoad);
     }
 }

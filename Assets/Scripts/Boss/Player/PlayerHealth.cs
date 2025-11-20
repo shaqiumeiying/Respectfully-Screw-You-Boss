@@ -15,7 +15,15 @@ public class PlayerHealth : MonoBehaviour
     public float invincibleDuration = 2f;  
     public float flashInterval = 0.1f;
 
+    [Header("Ouch Sounds")]
+    public AudioClip[] ouchSounds;
+    private AudioSource audioSource;
+
+
     public UIHeartsController heartsUI;
+
+    public int CurrentHealth => currentHealth;
+    public static float lastPlayerHealth;
 
     private Rigidbody2D rb;
     private Collider2D col;
@@ -26,6 +34,13 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+
+        audioSource = GetComponent<AudioSource>();
+        if (!audioSource)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -54,7 +69,9 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int amount)
     {
         if (isInvincible) return;
-        
+
+        PlayRandomOuch();
+
         currentHealth -= amount;
         currentHealth = Mathf.Max(0, currentHealth);
         Debug.Log($"Player hit! HP: {currentHealth}/{maxHealth}");
@@ -100,15 +117,31 @@ public class PlayerHealth : MonoBehaviour
             BossBase.bossLastHealthPercent = percent;
         }
 
-        //todo add player feedback
+        // --- SLOW MOTION ---
+        Time.timeScale = 0.6f;
 
         // Find fade panel in scene
         FadeController fade = FindObjectOfType<FadeController>();
 
         if (fade != null)
-            StartCoroutine(fade.FadeToWhiteAndLoad("Lose", 1.5f));
+            StartCoroutine(fade.Fade(
+        new Color(1, 0, 0, 0),
+        new Color(1, 0, 0, 1),
+        0.5f,
+        "Lose"
+    ));
         else
             SceneManager.LoadScene("Lose");
     }
+
+    private void PlayRandomOuch()
+    {
+        if (ouchSounds != null && ouchSounds.Length > 0)
+        {
+            int index = Random.Range(0, ouchSounds.Length);
+            audioSource.PlayOneShot(ouchSounds[index]);
+        }
+    }
+
 
 }

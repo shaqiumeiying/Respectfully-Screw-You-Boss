@@ -5,7 +5,9 @@ using TMPro;
 public class LoseUIController : MonoBehaviour
 {
     public Image fillBar;
-    public TMP_Text percentText;
+    public TMP_Text percentTextbase;
+    public TMP_Text percentTextbase1;
+    public TMP_Text percentTextbase2;
 
     void Start()
     {
@@ -17,6 +19,8 @@ public class LoseUIController : MonoBehaviour
     {
         percent = Mathf.Clamp01(percent);
         fillBar.fillAmount = percent;
-        percentText.text = Mathf.RoundToInt(percent * 100f) + "%";
+        percentTextbase.text = Mathf.RoundToInt(percent * 100f) + "%";
+        percentTextbase1.text = Mathf.RoundToInt(percent * 100f) + "%";
+        percentTextbase2.text = Mathf.RoundToInt(percent * 100f) + "%";
     }
 }

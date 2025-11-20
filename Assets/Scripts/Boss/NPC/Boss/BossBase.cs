@@ -18,6 +18,20 @@ public class BossBase : MonoBehaviour
     public AudioClip gruntSound;
     public AudioClip attackSFX;
 
+    [Header("Teleport Settings")]
+    public Transform leftPoint;
+    public Transform rightPoint;
+
+    public float minTeleportTime = 6f;
+    public float maxTeleportTime = 10f;
+
+    public float shiftDistance = 0.5f; 
+    public float shiftSpeed = 4f;     
+
+    private bool onLeftSide = false;
+
+
+
     [Header("Hit Reaction")]
     public float flashTime = 0.1f;
     public float jitterDuration = 0.15f;
@@ -62,6 +76,7 @@ public class BossBase : MonoBehaviour
             originalColor = sr.color;
 
         StartCoroutine(BossBehaviorLoop());
+        StartCoroutine(TeleportLoop());
     }
 
     IEnumerator BossBehaviorLoop()
@@ -92,6 +107,19 @@ public class BossBase : MonoBehaviour
             }
         }
     }
+
+    IEnumerator TeleportLoop()
+    {
+        while (!isDead)
+        {
+            // Wait 6–10 seconds randomly
+            float waitTime = Random.Range(minTeleportTime, maxTeleportTime);
+            yield return new WaitForSeconds(waitTime);
+
+            TeleportBoss();
+        }
+    }
+
 
     IEnumerator PerformMeleeAttack()
     {
@@ -153,19 +181,92 @@ public class BossBase : MonoBehaviour
 
     IEnumerator JitterEffect()
     {
+        //float elapsed = 0f;
+        //while (elapsed < jitterDuration)
+        //{
+        //    Vector3 randomOffset = new Vector3(
+        //        Random.Range(-jitterStrength, jitterStrength),
+        //        Random.Range(-jitterStrength, jitterStrength),
+        //        0);
+        //    transform.localPosition = originalPosition + randomOffset;
+        //    elapsed += Time.deltaTime;
+        //    yield return null;
+        //}
+        //transform.localPosition = originalPosition;
+        Vector3 basePos = transform.position;  // 记录当前真正的位置
         float elapsed = 0f;
+
         while (elapsed < jitterDuration)
         {
             Vector3 randomOffset = new Vector3(
                 Random.Range(-jitterStrength, jitterStrength),
                 Random.Range(-jitterStrength, jitterStrength),
                 0);
-            transform.localPosition = originalPosition + randomOffset;
+
+            transform.position = basePos + randomOffset;
+
             elapsed += Time.deltaTime;
             yield return null;
         }
-        transform.localPosition = originalPosition;
+
+        // 回到 jitter 开始时的位置
+        transform.position = basePos;
     }
+
+    void TeleportBoss()
+    {
+        if (onLeftSide)
+        {
+            StartCoroutine(ShiftAndTeleport(rightPoint.position, shiftDirection: Vector3.left, flipAfter: false));
+        }
+        else
+        {
+            StartCoroutine(ShiftAndTeleport(leftPoint.position, shiftDirection: Vector3.right, flipAfter: true));
+        }
+
+        Debug.Log("Boss teleported to: " + (onLeftSide ? "LEFT" : "RIGHT"));
+    }
+
+    IEnumerator ShiftAndTeleport(Vector3 targetPosition, Vector3 shiftDirection, bool flipAfter)
+    {
+        Vector3 shiftTarget = transform.position + shiftDirection * shiftDistance;
+
+        while (Vector3.Distance(transform.position, shiftTarget) > 0.01f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, shiftTarget, shiftSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.15f);
+
+        transform.position = targetPosition;
+
+        sr.flipX = flipAfter;
+
+        onLeftSide = flipAfter;
+
+        Color c = sr.color;
+        c.a = 0f;
+        sr.color = c;
+
+        float t = 0f;
+        float fadeDuration = 0.15f;  // very quick fade-in
+
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            c.a = Mathf.Lerp(0f, 1f, t / fadeDuration);
+            sr.color = c;
+            yield return null;
+        }
+
+        // ensure fully visible
+        c.a = 1f;
+        sr.color = c;
+    }
+
+
+
 
     void Die()
     {
@@ -181,6 +282,13 @@ public class BossBase : MonoBehaviour
             rb.gravityScale = 2f;
         }
 
+        PlayerHealth ph = FindObjectOfType<PlayerHealth>();
+        if (ph != null)
+        {
+            PlayerHealth.lastPlayerHealth = ph.CurrentHealth;
+            Debug.Log("Saved player HP for Win Scene: " + PlayerHealth.lastPlayerHealth);
+        }
+
         // --- SLOW MOTION ---
         Time.timeScale = 0.3f;
 
@@ -188,7 +296,12 @@ public class BossBase : MonoBehaviour
         FadeController fade = FindObjectOfType<FadeController>();
 
         if (fade != null)
-            StartCoroutine(fade.FadeToWhiteAndLoad("Win", 1.5f));
+            StartCoroutine(fade.Fade(
+            new Color(1, 1, 1, 0),   // transparent white
+            new Color(1, 1, 1, 1),   // fully white
+            1.5f,                    // duration
+            "Win"                    // scene to load
+        ));
         else
             SceneManager.LoadScene("Win");
     }
