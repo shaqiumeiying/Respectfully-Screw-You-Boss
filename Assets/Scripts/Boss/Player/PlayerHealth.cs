@@ -9,9 +9,9 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 3;
     private int currentHealth;
     private bool isInvincible = false;
+    public bool IsInvincible => isInvincible;
 
-    [Header("Hit Reaction")]
-    public float knockbackForce = 200f;     
+    [Header("Hit Reaction")] 
     public float invincibleDuration = 2f;  
     public float flashInterval = 0.1f;
 
@@ -24,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
 
     public int CurrentHealth => currentHealth;
     public static float lastPlayerHealth;
+
 
     private Rigidbody2D rb;
     private Collider2D col;
@@ -52,18 +53,11 @@ public class PlayerHealth : MonoBehaviour
             {
             
                 Vector2 knockDir = new Vector2(-1f, 1f).normalized;
-                ApplyKnockback(knockDir);
                 TakeDamage(1);
             }
 
     }
 
-    void ApplyKnockback(Vector2 dir)
-    {
-        rb.velocity = Vector2.zero;
-        rb.AddForce(dir * knockbackForce, ForceMode2D.Impulse);
-        Debug.Log($"Player knocked back! {dir}" );
-    }
 
 
     public void TakeDamage(int amount)

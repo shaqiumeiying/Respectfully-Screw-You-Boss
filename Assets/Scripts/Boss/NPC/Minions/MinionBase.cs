@@ -28,11 +28,14 @@ public class MinionBase : MonoBehaviour
         col = GetComponent<Collider2D>();
         sr = GetComponent<SpriteRenderer>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        Physics2D.IgnoreCollision(
+            GetComponent<Collider2D>(),
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>(),
+            true);
     }
 
     public void TakeDamage(float amount, Vector2 hitDirection = default)
     {
-
         StartCoroutine(FlashRed());
 
         if (rb != null)
@@ -85,7 +88,6 @@ public class MinionBase : MonoBehaviour
         sr.color = original;
     }
 
-
     public float GetHealthRatio()
     {
         return currentHealth / maxHealth;
@@ -93,6 +95,32 @@ public class MinionBase : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        // --- Player collision logic ---
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Minion hit player");
+            PlayerHealth hp = other.GetComponent<PlayerHealth>();
+
+            if (hp == null) return;
+            if (hp.IsInvincible)
+                return;
+            hp.TakeDamage(1);
+
+            PlayerMovement pm = other.GetComponent<PlayerMovement>();
+
+            if (pm != null)
+            {
+                Vector2 dir = (other.transform.position - transform.position).normalized;
+
+                // Add upward knockback
+                dir.y = 1.2f; 
+                dir.Normalize();
+
+                pm.ApplyKnockback(dir * 6f);
+            }
+        }
+
+        // --- Existing projectile logic ---
         Projectile proj = other.GetComponent<Projectile>();
         if (proj)
         {

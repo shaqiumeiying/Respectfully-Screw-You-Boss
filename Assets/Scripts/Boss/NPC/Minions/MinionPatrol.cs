@@ -38,14 +38,15 @@ public class MinionPatrol : MonoBehaviour
 
         float distanceToPlayer = Mathf.Abs(player.position.x - transform.position.x);
 
-        if (distanceToPlayer < playerDetectRange)
-        {
-            SwarmToPlayer();
-        }
-        else
-        {
-            Patrol();
-        }
+        //if (distanceToPlayer < playerDetectRange)
+        //{
+        //    SwarmToPlayer();
+        //}
+        //else
+        //{
+        //    Patrol();
+        //}
+        Patrol();
     }
 
     void Patrol()

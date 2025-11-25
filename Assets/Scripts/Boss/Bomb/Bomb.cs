@@ -31,8 +31,11 @@ public class Bomb : MonoBehaviour
 
         if (shadowInstance != null)
             baseScale = shadowInstance.transform.localScale;   // store it once
-            shadowSR = shadowInstance.GetComponent<SpriteRenderer>();
-
+            shadowSR = shadowInstance.GetComponent<SpriteRenderer>();   
+        Physics2D.IgnoreCollision(
+            GetComponent<Collider2D>(),
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>(),
+            true);
     }
 
     void Update()
@@ -56,6 +59,19 @@ public class Bomb : MonoBehaviour
 
         if (collision.collider.CompareTag("Ground"))
         {
+            Debug.Log("Bomb collided with " + collision.collider.tag);
+            Explode();
+        }
+
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (hasExploded) return;
+
+        if (collision.CompareTag("Player"))
+        {
+            Debug.Log("Bomb Trigger hit player");
             Explode();
         }
     }
@@ -78,6 +94,17 @@ public class Bomb : MonoBehaviour
             {
                 player.TakeDamage(explosionDamage);
                 Debug.Log("Player hit by bomb");
+            }
+
+            PlayerMovement pm = hit.GetComponent<PlayerMovement>();
+            if (pm != null)
+            {
+                Vector2 dir = (hit.transform.position - transform.position).normalized;
+                dir.y = 1.2f;
+                dir.x = 1.2f;
+                dir.Normalize();
+                //Knockback force by bomb
+                pm.ApplyKnockback(dir * 10f);
             }
         }
 

@@ -46,6 +46,7 @@ public class BombSpawner : MonoBehaviour
 
         GameObject shadow = Instantiate(shadowPrefab, targetPos, Quaternion.identity);
         SpriteRenderer sr = shadow.GetComponent<SpriteRenderer>();
+        shadow.transform.SetParent(targetPlatform);
 
         yield return new WaitForSeconds(delayBeforeFall);
 

@@ -30,6 +30,9 @@ public class BossBase : MonoBehaviour
 
     private bool onLeftSide = false;
 
+    [Header("Attack Effect")]
+    public GameObject attackEffectPrefab;
+    public Transform attackPoint;
 
 
     [Header("Hit Reaction")]
@@ -79,6 +82,16 @@ public class BossBase : MonoBehaviour
         StartCoroutine(TeleportLoop());
     }
 
+    void FlipAttackPoint()
+    {
+        if (attackPoint == null) return;
+
+        Vector3 p = attackPoint.localPosition;
+        p.x *= -1;
+        attackPoint.localPosition = p;
+    }
+
+
     IEnumerator BossBehaviorLoop()
     {
         while (!isDead)
@@ -107,7 +120,6 @@ public class BossBase : MonoBehaviour
             }
         }
     }
-
     IEnumerator TeleportLoop()
     {
         while (!isDead)
@@ -131,6 +143,25 @@ public class BossBase : MonoBehaviour
 
         if (attackSFX && audioSource)
             audioSource.PlayOneShot(attackSFX);
+
+        if (attackEffectPrefab && attackPoint)
+        {
+            GameObject effect = Instantiate(attackEffectPrefab, attackPoint.position, attackPoint.rotation);
+
+            // Try SpriteRenderer flip
+            SpriteRenderer fxSR = effect.GetComponent<SpriteRenderer>();
+            if (fxSR != null)
+            {
+                fxSR.flipX = sr.flipX;
+            }
+            else
+            {
+                // fallback: flip by scale
+                Vector3 scale = effect.transform.localScale;
+                scale.x = Mathf.Abs(scale.x) * (sr.flipX ? -1f : 1f);
+                effect.transform.localScale = scale;
+            }
+        }
 
         Vector2 playerPos = playerTarget.position;
         float distance = Vector2.Distance(playerPos, transform.position);
@@ -181,19 +212,7 @@ public class BossBase : MonoBehaviour
 
     IEnumerator JitterEffect()
     {
-        //float elapsed = 0f;
-        //while (elapsed < jitterDuration)
-        //{
-        //    Vector3 randomOffset = new Vector3(
-        //        Random.Range(-jitterStrength, jitterStrength),
-        //        Random.Range(-jitterStrength, jitterStrength),
-        //        0);
-        //    transform.localPosition = originalPosition + randomOffset;
-        //    elapsed += Time.deltaTime;
-        //    yield return null;
-        //}
-        //transform.localPosition = originalPosition;
-        Vector3 basePos = transform.position;  // 记录当前真正的位置
+        Vector3 basePos = transform.position;
         float elapsed = 0f;
 
         while (elapsed < jitterDuration)
@@ -208,8 +227,6 @@ public class BossBase : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-
-        // 回到 jitter 开始时的位置
         transform.position = basePos;
     }
 
@@ -240,10 +257,10 @@ public class BossBase : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
 
         transform.position = targetPosition;
-
         sr.flipX = flipAfter;
-
         onLeftSide = flipAfter;
+
+        FlipAttackPoint();
 
         Color c = sr.color;
         c.a = 0f;
