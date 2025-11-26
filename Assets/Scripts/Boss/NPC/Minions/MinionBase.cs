@@ -95,6 +95,8 @@ public class MinionBase : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (isDead) return;
+
         // --- Player collision logic ---
         if (other.CompareTag("Player"))
         {
